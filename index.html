@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Web Page Title -->
+    <title>Quiz Web</title>
+
+    <!-- Linking the External CSS stylesheet file -->
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="main-container">
+
+        <!-- Question Number  -->
+        <h2 id="question-count"></h2>
+        
+        <!-- Question -->
+        <div class="question-container">
+            <p class="question" id="question"></p>
+        </div>
+
+        <!-- Options Main Container Box -->
+        <div class="option-container">
+
+            <!-- Options -->
+            <p id="opt-1" class="list-content"></p>
+            <p id="opt-2" class="list-content"></p>
+            <p id="opt-3" class="list-content"></p>
+            <p id="opt-4" class="list-content"></p>
+
+        </div>
+
+        <!-- SUBMIT Button -->
+        <div class="button-container">
+            <button id="submit-button">SUBMIT</button>
+        </div>
+
+        <!-- Marks Display -->
+        <div class="marks">
+            <p id="marks-display"></p>
+        </div>
+    </div>
+
+    <script>
+        // Questions DataSet
+        data = [
+            ques_1 = {
+                ques : " What does HTML stands for ?",
+                option: ["Hyper Text Markup Language","Hyperlinks and Text Markup Language","Home Tool Markup Language","High Tech Markup Language"],
+                correct_ans : "Hyper Text Markup Language"
+            },
+            ques_2 = {
+                ques : "Which tag is used to create a hyperlink in HTML?",
+                option: [ "link","a","href","hyperlink"],
+                correct_ans : 'a'
+            },
+            ques_3 = {
+                ques : "Which tag is used to define an unordered list in HTML?",
+                option: ["list","ul","ol","li"],
+                correct_ans : "ul"
+            },
+            ques_4 = {
+                ques : "Which HTML attribute is used to specify an image filename?",
+                option: ["src","img","link","href"],
+                correct_ans : "src"
+            },
+            ques_5 = {
+                ques : "Which tag is used for creating a table in HTML?",
+                option: ["table","tab","tr","td"],
+                correct_ans : "table"
+            },
+            ques_6 = {
+                ques : `What does the HTML acronym "DOCTYPE" stand for?`,
+                option: ["Document Type","Document Text","Document Tools","Document Tag"],
+                correct_ans : "Document Type"
+            },
+            ques_7 = {
+                ques : "Which attribute is used to define inline styles in HTML?",
+                option: ["class","style","id","font"],
+                correct_ans : "style"
+            },
+            ques_8 = {
+                ques : "Which tag is used to make text bold in HTML? ",
+                option: ["b","bold","strong","em"],
+                correct_ans : "b"
+            },
+            ques_9 = {
+                ques : "What is the correct HTML tag for inserting a line break?",
+                option: ["lb","newline","break","br"],
+                correct_ans : "br"
+            },
+            ques_10 = {
+                ques : "HTML is ",
+                option: ['Programming Language','Mark Up Language',"Both above","Server Side Scripting Language"],
+                correct_ans : "Mark Up Language"
+            },
+        ]
+
+        let counter=0;
+        let count = data.length;
+        let marks = 0;
+        selected_ans = "";
+
+        // Variable Declaration
+        const ans_1 = document.getElementById("opt-1");
+        const ans_2 = document.getElementById("opt-2");
+        const ans_3 = document.getElementById("opt-3");
+        const ans_4 = document.getElementById("opt-4");
+        const ques = document.getElementById("question");
+        const submit_button = document.getElementById("submit-button");
+        const marks_display = document.getElementById("marks-display")
+    
+
+        function next_question(){
+
+            if (counter<count){
+            // Question_Count
+            document.getElementById("question-count").innerText = `QUESTION -- ${counter+1}`;
+
+            // Question
+            ques.textContent = data[counter].ques;
+
+            // Options
+            ans_1.textContent = data[counter].option[0];
+            ans_2.textContent = data[counter].option[1];
+            ans_3.textContent = data[counter].option[2];
+            ans_4.textContent = data[counter].option[3];
+            }
+        }
+
+        
+        // Answer Check Function
+        function answer_check(){
+            if (selected_ans==data[counter].correct_ans){
+                marks++;
+            }
+            
+            marks_display.textContent = `Marks = ${marks}`;
+            marks_display.style.backgroundColor="#ffbbbb";
+            
+            // Counter Increment
+            counter++;
+
+            next_question();
+            
+            
+            ans_2.style.backgroundColor='blanchedalmond';
+            ans_3.style.backgroundColor='blanchedalmond';
+            ans_4.style.backgroundColor='blanchedalmond';
+            ans_1.style.backgroundColor='blanchedalmond';
+        }
+
+
+        // Answer 1
+        ans_1.addEventListener("click",()=>{
+            ans_2.style.backgroundColor='white';
+            ans_3.style.backgroundColor='white';
+            ans_4.style.backgroundColor='white';
+
+            ans_1.style.backgroundColor='#75ff79';
+            selected_ans = ans_1.innerText;
+        })
+
+
+        // Answer 2
+        ans_2.addEventListener("click",()=>{
+            ans_1.style.backgroundColor='white';
+            ans_3.style.backgroundColor='white';
+            ans_4.style.backgroundColor='white';
+
+            ans_2.style.backgroundColor='#75ff79';
+            selected_ans = ans_2.innerText;
+        })
+
+
+        // Answer 3
+        ans_3.addEventListener("click",()=>{
+            ans_1.style.backgroundColor='white';
+            ans_2.style.backgroundColor='white';
+            ans_4.style.backgroundColor='white';
+
+            ans_3.style.backgroundColor='#75ff79';
+            selected_ans = ans_3.innerText;
+        })
+
+
+        // Answer 4
+        ans_4.addEventListener("click",()=>{
+            ans_1.style.backgroundColor='white';
+            ans_2.style.backgroundColor='white';
+            ans_3.style.backgroundColor='white';
+
+            ans_4.style.backgroundColor='#75ff79';
+            selected_ans = ans_4.innerText;
+        })
+        next_question();
+        submit_button.addEventListener("click",answer_check);
+
+    </script>
+
+</body>
+</html>
